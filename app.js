@@ -14,11 +14,15 @@ app.use(cookieParser())
 const blood = require('./routes/blood')
 const user = require('./routes/auth')
 const request = require('./routes/request')
+const donation = require('./routes/donation')
 
 
-app.use(blood);
+app.use(blood)
 app.use(user)
-app.use(request);
+app.use(request)
+app.use(donation)
 
-app.use(errorMiddleware);
+app.use(errorMiddleware)
+
+
 module.exports = app
