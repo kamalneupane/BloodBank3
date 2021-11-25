@@ -12,11 +12,13 @@ app.use(cookieParser())
 
 // import all routes
 const blood = require('./routes/blood')
-app.use(blood);
-
 const user = require('./routes/auth')
-app.use(user)
+const request = require('./routes/request')
 
+
+app.use(blood);
+app.use(user)
+app.use(request);
 
 app.use(errorMiddleware);
 module.exports = app
