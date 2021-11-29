@@ -6,7 +6,7 @@ const donationSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    donateGroup:[
+    donateGroup:
         {
             name: {
                 type: String,
@@ -21,8 +21,7 @@ const donationSchema = new mongoose.Schema({
                 required: true,
                 ref: 'Blood'
             }
-        }
-    ],
+        },
     age: {
         type: Number,
         required: true

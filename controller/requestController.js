@@ -66,9 +66,14 @@ exports.updateRequest = catchAsyncErrors( async( req, res, next) => {
         return next(new ErrorHandler('You have already respond this request',400))
     }
 
-    request.requestGroup.forEach(async item => {
-        await updateBlood(item.blood, item.units);
-    })
+    const  id = request.requestGroup.blood
+    const unit = request.requestGroup.units
+
+    updateBlood(id, unit)
+
+    // request.requestGroup.forEach(async item => {
+    //     await updateBlood(item.blood, item.units);
+    // })
 
     request.status = req.body.status
 

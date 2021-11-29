@@ -58,6 +58,7 @@ exports.allDonations = catchAsyncErrors( async(req, res, next) => {
 // update donation => admin/donation/:id
 exports.updateDonation = catchAsyncErrors(async(req, res, next) => {
     const donation = await Donation.findById(req.params.id);
+    console.log(donation)
     if(!donation){
         return next(new ErrorHandler('Donation not found with this id', 404))
     }
@@ -65,10 +66,13 @@ exports.updateDonation = catchAsyncErrors(async(req, res, next) => {
         return next(new ErrorHandler('You have already respond this donation request'))
     }
 
+    const  id = donation.donateGroup.blood
+    const unit = donation.donateGroup.units
 
-    donation.donateGroup.forEach(async item => {
-        await updateBlood(item.blood, item.units);
-    })
+    updateBlood(id, unit);
+    // donation.donateGroup.forEach(async item => {
+    //     await updateBlood(item.blood, item.units);
+    // })
 
     donation.status = req.body.status
     await donation.save();

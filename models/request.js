@@ -6,7 +6,7 @@ const requestSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    requestGroup:[
+    requestGroup:
         {
             name: {
                 type: String,
@@ -22,7 +22,7 @@ const requestSchema = new mongoose.Schema({
                 ref: 'Blood'
             }
         }
-    ],
+    ,
     age: {
         type: Number,
         required: true
