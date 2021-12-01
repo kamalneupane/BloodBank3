@@ -1,6 +1,7 @@
 const Donation = require('../models/donation')
 const Blood = require('../models/blood')
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
+const APIFeatures = require('../utils/apiFeatures')
 const ErrorHandler = require('../utils/errorHandler')
 
 // New Donation Request => donation/new
@@ -49,9 +50,13 @@ exports.myDonations = catchAsyncErrors(async(req, res, next) => {
 })
 // get all donations => admin/donations
 exports.allDonations = catchAsyncErrors( async(req, res, next) => {
-    const donations = await Donation.find();
+    const apiFeatures = new APIFeatures(Donation.find(), req.query)
+                                    .search()
+
+    const donations = await apiFeatures.query;
     res.status(200).json({
         succcess: true,
+        count: donations.length,
         donations
     })
 })
